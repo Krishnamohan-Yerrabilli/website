@@ -6,7 +6,9 @@ feature:
   title: Service discovery and load balancing
   description: >
     No need to modify your application to use an unfamiliar service discovery mechanism. Kubernetes gives Pods their own IP addresses and a single DNS name for a set of Pods, and can load-balance across them.
-
+description: >-
+  Expose an application running in your cluster behind a single outward-facing
+  endpoint, even when the workload is split across multiple backends.
 content_type: concept
 weight: 10
 ---
@@ -287,7 +289,7 @@ There are a few reasons for using proxying for Services:
   on the DNS records could impose a high load on DNS that then becomes
   difficult to manage.
 
-Later in this page you can read about various kube-proxy implementations work. Overall,
+Later in this page you can read about how various kube-proxy implementations work. Overall,
 you should note that, when running `kube-proxy`, kernel level rules may be
 modified (for example, iptables rules might get created), which won't get cleaned up,
 in some cases until you reboot.  Thus, running kube-proxy is something that should
@@ -503,18 +505,18 @@ It also supports variables (see [makeLinkVariables](https://github.com/kubernete
 that are compatible with Docker Engine's
 "_[legacy container links](https://docs.docker.com/network/links/)_" feature.
 
-For example, the Service `redis-master` which exposes TCP port 6379 and has been
+For example, the Service `redis-primary` which exposes TCP port 6379 and has been
 allocated cluster IP address 10.0.0.11, produces the following environment
 variables:
 
 ```shell
-REDIS_MASTER_SERVICE_HOST=10.0.0.11
-REDIS_MASTER_SERVICE_PORT=6379
-REDIS_MASTER_PORT=tcp://10.0.0.11:6379
-REDIS_MASTER_PORT_6379_TCP=tcp://10.0.0.11:6379
-REDIS_MASTER_PORT_6379_TCP_PROTO=tcp
-REDIS_MASTER_PORT_6379_TCP_PORT=6379
-REDIS_MASTER_PORT_6379_TCP_ADDR=10.0.0.11
+REDIS_PRIMARY_SERVICE_HOST=10.0.0.11
+REDIS_PRIMARY_SERVICE_PORT=6379
+REDIS_PRIMARY_PORT=tcp://10.0.0.11:6379
+REDIS_PRIMARY_PORT_6379_TCP=tcp://10.0.0.11:6379
+REDIS_PRIMARY_PORT_6379_TCP_PROTO=tcp
+REDIS_PRIMARY_PORT_6379_TCP_PORT=6379
+REDIS_PRIMARY_PORT_6379_TCP_ADDR=10.0.0.11
 ```
 
 {{< note >}}

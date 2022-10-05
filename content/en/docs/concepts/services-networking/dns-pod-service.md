@@ -4,7 +4,10 @@ reviewers:
 - thockin
 title: DNS for Services and Pods
 content_type: concept
-weight: 20
+weight: 60
+description: >-
+  Your workload can discover Services within your cluster using DNS;
+  this page explains how that works.
 ---
 <!-- overview -->
 
@@ -308,7 +311,7 @@ kubectl exec -it dns-example -- cat /etc/resolv.conf
 ```
 The output is similar to this:
 ```
-nameserver fd00:79:30::a
+nameserver 2001:db8:30::a
 search default.svc.cluster-domain.example svc.cluster-domain.example cluster-domain.example
 options ndots:5
 ```

@@ -14,15 +14,16 @@ no_list: true
 
 <!-- overview -->
 <!--
-Kubernetes reserves all labels and annotations in the kubernetes.io namespace.
+Kubernetes reserves all labels and annotations in the kubernetes.io and k8s.io namespaces.
 
 This document serves both as a reference to the values and as a coordination point for assigning values.
 -->
-Kubernetes 将所有标签和注解保留在 kubernetes.io Namespace中。
+Kubernetes 将所有标签和注解保留在 kubernetes.io 和 k8s.io 名字空间中。
 
 本文档既可作为值的参考，也可作为分配值的协调点。
 
 <!-- body -->
+
 <!--
 ## Labels, annotations and taints used on API objects
 
@@ -30,53 +31,56 @@ Kubernetes 将所有标签和注解保留在 kubernetes.io Namespace中。
 
 Example: `app.kubernetes.io/component: "database"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
 The component within the architecture.
 
 One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
-## API 对象上使用的标签、注解和污点
+## API 对象上使用的标签、注解和污点   {#labels-annotations-and-taints-used-on-api-objects}
 
 ### app.kubernetes.io/component {#app-kubernetes-io-component}
 
 例子: `app.kubernetes.io/component: "database"`
 
-用于: 所有对象
+用于: 所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
 架构中的组件。
 
 [推荐标签](/zh-cn/docs/concepts/overview/working-with-objects/common-labels/#labels)之一。
 
 <!--
-### app.kubernetes.io/created-by
+### app.kubernetes.io/created-by (deprecated)
 
 Example: `app.kubernetes.io/created-by: "controller-manager"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
 The controller/user who created this resource.
-
-One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
-### app.kubernetes.io/created-by {#app-kubernetes-io-created-by}
+### app.kubernetes.io/created-by（已弃用）  {#app-kubernetes-io-created-by}
 
 示例：`app.kubernetes.io/created-by: "controller-manager"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
 创建此资源的控制器/用户。
 
-[推荐标签](/zh-cn/docs/concepts/overview/working-with-objects/common-labels/#labels)之一。
+{{< note >}}
+<!--
+Starting from v1.9, this label is deprecated.
+-->
+从 v1.9 开始，这个标签被弃用。
+{{< /note >}}
 
 <!--
 ### app.kubernetes.io/instance
 
 Example: `app.kubernetes.io/instance: "mysql-abcxzy"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
-A unique name identifying the instance of an application.
+A unique name identifying the instance of an application. To assign a non-unique name, use [app.kubernetes.io/name](#app-kubernetes-io-name).
 
 One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
@@ -84,9 +88,9 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 示例：`app.kubernetes.io/instance: "mysql-abcxzy"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
-标识应用实例的唯一名称。
+标识应用实例的唯一名称。要分配一个不唯一的名称，可使用 [app.kubernetes.io/name](#app-kubernetes-io-name)。
 
 [推荐标签](/zh-cn/docs/concepts/overview/working-with-objects/common-labels/#labels)之一。
 
@@ -95,7 +99,7 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 Example: `app.kubernetes.io/managed-by: "helm"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
 The tool being used to manage the operation of an application.
 
@@ -105,7 +109,7 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 示例：`app.kubernetes.io/managed-by: "helm"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
 用于管理应用操作的工具。
 
@@ -116,18 +120,17 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 Example: `app.kubernetes.io/name: "mysql"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
 The name of the application.
 
 One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
-
 ### app.kubernetes.io/name {#app-kubernetes-io-name}
 
 示例：`app.kubernetes.io/name: "mysql"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
 应用的名称。
 
@@ -138,9 +141,9 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 Example: `app.kubernetes.io/part-of: "wordpress"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
-The name of a higher level application this one is part of.
+The name of a higher-level application this one is part of.
 
 One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
@@ -148,7 +151,7 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 示例：`app.kubernetes.io/part-of: "wordpress"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
 此应用所属的更高级别应用的名称。
 
@@ -159,9 +162,14 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 Example: `app.kubernetes.io/version: "5.7.21"`
 
-Used on: All Objects
+Used on: All Objects (typically used on [workload resources](/docs/reference/kubernetes-api/workload-resources/)).
 
-The current version of the application (e.g., a semantic version, revision hash, etc.).
+The current version of the application.
+
+Common forms of values include:
+
+- [semantic version](https://semver.org/spec/v1.0.0.html)
+- the Git [revision hash](https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#_single_revisions) for the source code.
 
 One of the [recommended labels](/docs/concepts/overview/working-with-objects/common-labels/#labels).
 -->
@@ -169,11 +177,37 @@ One of the [recommended labels](/docs/concepts/overview/working-with-objects/com
 
 示例：`app.kubernetes.io/version: "5.7.21"`
 
-用于：所有对象
+用于：所有对象（通常用于[工作负载资源](/zh-cn/docs/reference/kubernetes-api/workload-resources/)）。
 
-应用的当前版本（例如，语义版本、修订哈希等）。
+值的常见形式包括：
+
+- [语义版本](https://semver.org/spec/v1.0.0.html)
+- 针对源代码的 Git [修订哈希](https://git-scm.com/book/en/v2/Git-Tools-Revision-Selection#_single_revisions)。
 
 [推荐标签](/zh-cn/docs/concepts/overview/working-with-objects/common-labels/#labels)之一。
+
+<!--
+### cluster-autoscaler.kubernetes.io/safe-to-evict
+
+Example: `cluster-autoscaler.kubernetes.io/safe-to-evict: "true"`
+
+Used on: Pod
+
+When this annotation is set to `"true"`, the cluster autoscaler is allowed to evict a Pod
+even if other rules would normally prevent that.
+The cluster autoscaler never evicts Pods that have this annotation explicitly set to
+`"false"`; you could set that on an important Pod that you want to keep running.
+If this annotation is not set then the cluster autoscaler follows its Pod-level behavior.
+-->
+### cluster-autoscaler.kubernetes.io/safe-to-evict  {#cluster-autoscaler-safe-to-evict}
+
+例子：`cluster-autoscaler.kubernetes.io/safe-to-evict: "true"`
+
+用于：Pod
+
+当这个注解设置为 `"true"` 时，即使其他规则通常会阻止驱逐操作，也会允许该集群自动扩缩器驱逐一个 Pod。
+集群自动扩缩器从不驱逐将此注解显式设置为 `"false"` 的 Pod；你可以针对要保持运行的重要 Pod 设置此注解。
+如果未设置此注解，则集群自动扩缩器将遵循其 Pod 级别的行为。
 
 <!-- 
 ### kubernetes.io/arch
@@ -330,6 +364,30 @@ The value for this annotation must be **true** to take effect. This annotation i
 只能引用在服务帐户的 `secrets` 字段中指定的 Secret API 对象。
 
 <!--
+### node.kubernetes.io/exclude-from-external-load-balancer
+
+Example: `node.kubernetes.io/exclude-from-external-load-balancer`
+
+Used on: Node
+
+Kubernetes automatically enables the `ServiceNodeExclusion` feature gate on the clusters it creates. With this feature gate enabled on a cluster,
+you can add labels to particular worker nodes to exclude them from the list of backend servers.
+The following command can be used to exclude a worker node from the list of backend servers in a backend set-
+`kubectl label nodes <node-name> node.kubernetes.io/exclude-from-external-load-balancers=true`
+-->
+### node.kubernetes.io/exclude-from-external-load-balancer   {#exclude-from-external-load-balancer}
+
+例子：`node.kubernetes.io/exclude-from-external-load-balancer`
+
+用于：Node
+
+Kubernetes 自动在其创建的集群上启用 `ServiceNodeExclusion` 特性门控。
+在一个集群上启用此特性门控后，你可以添加标签到特定的 Worker 节点，将这些节点从后端服务器列表排除在外。
+以下命令可用于从后端集的后端服务器列表中排除一个 Worker 节点：
+
+`kubectl label nodes <node-name> node.kubernetes.io/exclude-from-external-load-balancers=true`
+
+<!--
 ### controller.kubernetes.io/pod-deletion-cost {#pod-deletion-cost}
 
 Example: `controller.kubernetes.io/pod-deletion-cost: "10"`
@@ -384,11 +442,21 @@ This annotation only impacts DaemonSet pods.
 
 <!-- 
 ### kubernetes.io/ingress-bandwidth
+-->
+### kubernetes.io/ingress-bandwidth {#ingerss-bandwidth}
 
+{{< note >}}
+<!--
 Ingress traffic shaping annotation is an experimental feature.
 If you want to enable traffic shaping support, you must add the `bandwidth` plugin to your CNI configuration file (default `/etc/cni/net.d`) and
 ensure that the binary is included in your CNI bin dir (default `/opt/cni/bin`).
+-->
+入站流量控制注解是一项实验性功能。
+如果要启用流量控制支持，必须将 `bandwidth` 插件添加到 CNI 配置文件（默认为 `/etc/cni/net.d`）
+并确保二进制文件包含在你的 CNI bin 目录中（默认为 `/opt/cni/bin`）。
+{{< /note >}}
 
+<!--
 Example: `kubernetes.io/ingress-bandwidth: 10M`
 
 Used on: Pod
@@ -398,17 +466,8 @@ Ingress traffic (to the pod) is handled by shaping queued packets to effectively
 To limit the bandwidth on a pod, write an object definition JSON file and specify the data traffic
 speed using `kubernetes.io/ingress-bandwidth` annotation. The unit used for specifying ingress
 rate is bits per second, as a [Quantity](/docs/reference/kubernetes-api/common-definitions/quantity/).
-For example, `10M` means 10 megabits per second. 
+For example, `10M` means 10 megabits per second.
 -->
-
-### kubernetes.io/ingress-bandwidth {#ingerss-bandwidth}
-
-{{< note >}}
-入站流量控制注解是一项实验性功能。
-如果要启用流量控制支持，必须将 `bandwidth` 插件添加到 CNI 配置文件（默认为`/etc/cni/net.d`）
-并确保二进制文件包含在你的 CNI bin 目录中（默认为`/opt/cni/bin`）。
-{{< /note >}}
-
 示例：`kubernetes.io/ingress-bandwidth: 10M`
 
 用于：Pod
@@ -422,11 +481,21 @@ For example, `10M` means 10 megabits per second.
 
 <!-- 
 ### kubernetes.io/egress-bandwidth
+-->
+### kubernetes.io/egress-bandwidth {#egress-bandwidth}
 
+{{< note >}}
+<!--
 Egress traffic shaping annotation is an experimental feature.
 If you want to enable traffic shaping support, you must add the `bandwidth` plugin to your CNI configuration file (default `/etc/cni/net.d`) and
 ensure that the binary is included in your CNI bin dir (default `/opt/cni/bin`).
+-->
+出站流量控制注解是一项实验性功能。
+如果要启用流量控制支持，必须将 `bandwidth` 插件添加到 CNI 配置文件（默认为 `/etc/cni/net.d`）
+并确保二进制文件包含在你的 CNI bin 目录中（默认为 `/opt/cni/bin`）。
+{{< /note >}}
 
+<!--
 Example: `kubernetes.io/egress-bandwidth: 10M`
 
 Used on: Pod
@@ -436,17 +505,8 @@ The limits you place on a pod do not affect the bandwidth of other pods.
 To limit the bandwidth on a pod, write an object definition JSON file and specify the data traffic
 speed using `kubernetes.io/egress-bandwidth` annotation. The unit used for specifying egress
 rate is bits per second, as a [Quantity](/docs/reference/kubernetes-api/common-definitions/quantity/).
-For example, `10M` means 10 megabits per second. 
+For example, `10M` means 10 megabits per second.
 -->
-
-### kubernetes.io/egress-bandwidth {#egress-bandwidth}
-
-{{< note >}}
-出站流量控制注解是一项实验性功能。
-如果要启用流量控制支持，必须将 `bandwidth` 插件添加到 CNI 配置文件（默认为`/etc/cni/net.d`）
-并确保二进制文件包含在你的 CNI bin 目录中（默认为`/opt/cni/bin`）。
-{{< /note >}}
-
 示例：`kubernetes.io/egress-bandwidth: 10M`
 
 用于：Pod
@@ -921,7 +981,7 @@ Used on: Node
 
 The kubelet can set this annotation on a Node to denote its configured IPv4 address.
 
-When kubelet is started with the "external" cloud provider, it sets this annotation on the Node to denote an IP address set from the command line flag (`--node-ip`). This IP is verified with the cloud provider as valid by the cloud-controller-manager.
+When kubelet is started with the `--cloud-provider` flag set to any value (includes both external and legacy in-tree cloud providers), it sets this annotation on the Node to denote an IP address set from the command line flag (`--node-ip`). This IP is verified with the cloud provider as valid by the cloud-controller-manager.
 -->
 ### alpha.kubernetes.io/provided-node-ip {#alpha-kubernetes-io-provided-node-ip}
 
@@ -931,7 +991,8 @@ When kubelet is started with the "external" cloud provider, it sets this annotat
 
 kubelet 可以在 Node 上设置此注解来表示其配置的 IPv4 地址。
 
-当使用“外部”云驱动启动时，kubelet 会在 Node 上设置此注解以表示从命令行标志 ( `--node-ip` ) 设置的 IP 地址。
+如果 kubelet 被启动时 `--cloud-provider` 标志设置为任一云驱动（包括外部云驱动和传统树内云驱动）
+kubelet 会在 Node 上设置此注解以表示从命令行标志（`--node-ip`）设置的 IP 地址。
 云控制器管理器通过云驱动验证此 IP 是否有效。
 
 <!--
@@ -1129,7 +1190,7 @@ kubelet 检查 `/proc/sys/kernel/pid_max` 大小的 D 值和 Kubernetes 在 Node
 <!--
 Example: `node.kubernetes.io/out-of-service:NoExecute`
 
-A user can manually add the taint to a Node marking it out-of-service. If the `NodeOutOfServiceVolumeDetach` 
+A user can manually add the taint to a Node marking it out-of-service. If the `NodeOutOfServiceVolumeDetach`
 [feature gate](/docs/reference/command-line-tools-reference/feature-gates/) is enabled on
 `kube-controller-manager`, and a Node is marked out-of-service with this taint, the pods on the node will be forcefully deleted if there are no matching tolerations on it and volume detach operations for the pods terminating on the node will happen immediately. This allows the Pods on the out-of-service node to recover quickly on a different node.
 -->
@@ -1348,7 +1409,10 @@ for more information.
 
 Example: `kubernetes.io/psp: restricted`
 
-This annotation is only relevant if you are using [PodSecurityPolicies](/docs/concepts/security/pod-security-policy/).
+Used on: Pod
+
+This annotation was only relevant if you were using [PodSecurityPolicies](/docs/concepts/security/pod-security-policy/).
+Kubernetes v{{< skew currentVersion >}} does not support the PodSecurityPolicy API.
 
 When the PodSecurityPolicy admission controller admits a Pod, the admission controller
 modifies the Pod to have this annotation.
@@ -1359,7 +1423,10 @@ The value of the annotation is the name of the PodSecurityPolicy that was used f
 
 例如：`kubernetes.io/psp: restricted`
 
+用于：Pod
+
 这个注解只在你使用 [PodSecurityPolicies](/zh-cn/docs/concepts/security/pod-security-policy/) 时才有意义。
+Kubernetes v{{< skew currentVersion >}} 不支持 PodSecurityPolicy API。
 
 当 PodSecurityPolicy 准入控制器接受一个 Pod 时，会修改该 Pod，
 并给这个 Pod 添加此注解。
@@ -1368,7 +1435,8 @@ The value of the annotation is the name of the PodSecurityPolicy that was used f
 <!--
 ### seccomp.security.alpha.kubernetes.io/pod (deprecated) {#seccomp-security-alpha-kubernetes-io-pod}
 
-This annotation has been deprecated since Kubernetes v1.19 and will become non-functional in v1.25.
+This annotation has been deprecated since Kubernetes v1.19 and will become non-functional in a future release.
+please use the corresponding pod or container `securityContext.seccompProfile` field instead.
 To specify security settings for a Pod, include the `securityContext` field in the Pod specification.
 The [`securityContext`](/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context) field within a Pod's `.spec` defines pod-level security attributes.
 When you [specify the security context for a Pod](/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod),
@@ -1376,7 +1444,8 @@ the settings you specify apply to all containers in that Pod.
 -->
 ### seccomp.security.alpha.kubernetes.io/pod (已弃用) {#seccomp-security-alpha-kubernetes-io-pod}
 
-此注解自 Kubernetes v1.19 起已被弃用，将在 v1.25 中失效。
+此注解自 Kubernetes v1.19 起已被弃用，将在未来的版本中失效。
+请使用对应 Pod 或容器的 `securityContext.seccompProfile` 字段替代。
 要为 Pod 指定安全设置，请在 Pod 规范中包含 `securityContext` 字段。
 Pod 的 `.spec` 中的 [`securityContext`](/zh-cn/docs/reference/kubernetes-api/workload-resources/pod-v1/#security-context)
 字段定义了 Pod 级别的安全属性。
@@ -1386,7 +1455,8 @@ Pod 的 `.spec` 中的 [`securityContext`](/zh-cn/docs/reference/kubernetes-api/
 <!--
 ### container.seccomp.security.alpha.kubernetes.io/[NAME] {#container-seccomp-security-alpha-kubernetes-io}
 
-This annotation has been deprecated since Kubernetes v1.19 and will become non-functional in v1.25.
+This annotation has been deprecated since Kubernetes v1.19 and will become non-functional in a future release.
+please use the corresponding pod or container `securityContext.seccompProfile` field instead.
 The tutorial [Restrict a Container's Syscalls with seccomp](/docs/tutorials/security/seccomp/) takes
 you through the steps you follow to apply a seccomp profile to a Pod or to one of
 its containers. That tutorial covers the supported mechanism for configuring seccomp in Kubernetes,
@@ -1394,7 +1464,8 @@ based on setting `securityContext` within the Pod's `.spec`.
 -->
 ### container.seccomp.security.alpha.kubernetes.io/[NAME] {#container-seccomp-security-alpha-kubernetes-io}
 
-此注解自 Kubernetes v1.19 起已被弃用，将在 v1.25 中失效。
+此注解自 Kubernetes v1.19 起已被弃用，将在未来的版本中失效。
+请使用对应 Pod 或容器的 `securityContext.seccompProfile` 字段替代。
 教程[使用 seccomp 限制容器的系统调用](/zh-cn/docs/tutorials/security/seccomp/)将引导你完成将
 seccomp 配置文件应用于 Pod 或其容器的步骤。
 该教程介绍了在 Kubernetes 中配置 seccomp 的支持机制，基于在 Pod 的 `.spec` 中设置 `securityContext`。
@@ -1541,25 +1612,3 @@ Example: `node-role.kubernetes.io/control-plane:NoSchedule`
 Taint that kubeadm applies on control plane nodes to allow only critical workloads to schedule on them.
 -->
 kubeadm 应用在控制平面节点上的污点，仅允许在其上调度关键工作负载。
-
-### node-role.kubernetes.io/master
-
-<!--
-Used on: Node
-
-Example: `node-role.kubernetes.io/master:NoSchedule`
--->
-例子：`node-role.kubernetes.io/master:NoSchedule`
-
-用于：Node
-
-<!--
-Taint that kubeadm applies on control plane nodes to allow only critical workloads to schedule on them.
-
-Starting in v1.20, this taint is deprecated in favor of `node-role.kubernetes.io/control-plane` and will be removed in v1.25.
--->
-kubeadm 应用在控制平面节点上的污点，仅允许在其上调度关键工作负载。
-
-{{< note >}}
-从 v1.20 开始，此污点已弃用，并将在 v1.25 中将其删除，取而代之的是 `node-role.kubernetes.io/control-plane`。
-{{< /note >}}
