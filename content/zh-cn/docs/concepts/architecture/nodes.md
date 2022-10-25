@@ -202,7 +202,7 @@ re-scheduled.
 如果在 kubelet 重启期间 Node 配置发生了变化，已经被调度到某 Node 上的 Pod
 可能会出现行为不正常或者出现其他问题，例如，已经运行的 Pod
 可能通过污点机制设置了与 Node 上新设置的标签相排斥的规则，也有一些其他 Pod，
-本来与此 Pod 之间存在不兼容的问题，也会因为新的标签设置而被调到到同一节点。
+本来与此 Pod 之间存在不兼容的问题，也会因为新的标签设置而被调到同一节点。
 节点重新注册操作可以确保节点上所有 Pod 都被排空并被正确地重新调度。
 {{< /note >}}
 
@@ -816,14 +816,14 @@ reserved for terminating [critical pods](/docs/tasks/administer-cluster/guarante
 在关闭期间，将保留前 20（30 - 10）秒用于体面终止常规 Pod，
 而保留最后 10 秒用于终止[关键 Pod](/zh-cn/docs/tasks/administer-cluster/guaranteed-scheduling-critical-addon-pods/#marking-pod-as-critical)。
 
+{{< note >}}
 <!--
-When pods were evicted during the graceful node shutdown, they are marked as failed.
-Running `kubectl get pods` shows the status of the the evicted pods as `Shutdown`.
+When pods were evicted during the graceful node shutdown, they are marked as shutdown.
+Running `kubectl get pods` shows the status of the evicted pods as `Terminated`.
 And `kubectl describe pod` indicates that the pod was evicted because of node shutdown:
 -->
-{{< note >}}
-当 Pod 在正常节点关闭期间被驱逐时，它们会被标记为已经失败（Failed）。
-运行 `kubectl get pods` 时，被驱逐的 Pod 的状态显示为 `Shutdown`。
+当 Pod 在正常节点关闭期间被驱逐时，它们会被标记为关闭。
+运行 `kubectl get pods` 时，被驱逐的 Pod 的状态显示为 `Terminated`。
 并且 `kubectl describe pod` 表示 Pod 因节点关闭而被驱逐：
 
 ```

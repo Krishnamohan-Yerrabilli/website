@@ -174,7 +174,7 @@ For example, using the `openssl` command line tool to generate a certificate sig
 如果提供了客户端证书并且证书被验证通过，则 subject 中的公共名称（Common Name）
 就被作为请求的用户名。
 自 Kubernetes 1.4 开始，客户端证书还可以通过证书的 organization 字段标明用户的组成员信息。
-要包含用户的多个组成员信息，可以在证书种包含多个 organization 字段。
+要包含用户的多个组成员信息，可以在证书中包含多个 organization 字段。
 
 例如，使用 `openssl` 命令行工具生成一个证书签名请求：
 
@@ -1897,7 +1897,7 @@ Presence or absence of an expiry has the following impact:
 时间戳格式给出的证书到期时间。
 证书到期时间的有无会有如下影响：
 
-- 如果响应中包含了到期时间，持有者令牌和 TLS 凭据会被缓存，直到到期期限到来、
+- 如果响应中包含了到期时间，持有者令牌和 TLS 凭据会被缓存，直到期限到来、
   或者服务器返回 401 HTTP 状态码，或者进程退出。
 - 如果未指定到期时间，则持有者令牌和 TLS 凭据会被缓存，直到服务器返回 401
   HTTP 状态码或者进程退出。
